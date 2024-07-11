@@ -41,14 +41,28 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 
 \providecommand{\tightlist}{%
@@ -155,6 +169,7 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
+
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -172,6 +187,7 @@
   citecolor={Blue},
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
+
 
 \journalname{Earth and Space Science}
 
@@ -199,10 +215,11 @@ eruption is found \ldots{}
 
 
 
+
 \section{Introduction}\label{introduction}
 
 \textsubscript{Source:
-\href{https://quarto-ext.github.io/manuscript-template-rstudio/index.qmd.html}{Article
+\href{https://fp3draza.github.io/quarto_manuscript_example/index.qmd.html}{Article
 Notebook}}
 
 \phantomsection\label{cell-fig-timeline}
@@ -219,11 +236,11 @@ Notebook}}
 \end{figure}%
 
 \textsubscript{Source:
-\href{https://quarto-ext.github.io/manuscript-template-rstudio/index.qmd.html}{Article
+\href{https://fp3draza.github.io/quarto_manuscript_example/index.qmd.html}{Article
 Notebook}}
 
 \textsubscript{Source:
-\href{https://quarto-ext.github.io/manuscript-template-rstudio/index.qmd.html}{Article
+\href{https://fp3draza.github.io/quarto_manuscript_example/index.qmd.html}{Article
 Notebook}}
 
 Based on data up to and including 1971, eruptions on La Palma happen
@@ -305,7 +322,7 @@ since 2017}
 \end{figure}%
 
 \textsubscript{Source:
-\href{https://quarto-ext.github.io/manuscript-template-rstudio/notebooks/explore-earthquakes-preview.html\#cell-fig-spatial-plot}{Explore
+\href{https://fp3draza.github.io/quarto_manuscript_example/notebooks/explore-earthquakes-preview.html\#cell-fig-spatial-plot}{Explore
 Earthquakes}}
 
 Figure~\ref{fig-spatial-plot} shows the location of recent Earthquakes
@@ -330,6 +347,7 @@ hazard maps in monogenetic volcanic fields: The example of {La} {Palma}
 \url{https://doi.org/10.1186/s13617-019-0085-5}
 
 \end{CSLReferences}
+
 
 
 
